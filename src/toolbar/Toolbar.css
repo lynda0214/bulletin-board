@@ -1,0 +1,33 @@
+.toolbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.toolbar__panel {
+    position: fixed;
+    z-index: 999;
+    bottom: 30px;
+    min-width: 20%;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 50px;
+    background: #FFFFFF;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.toolbar__btn {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #cccccc;
+}
+
+.toolbar__btn--selected {
+    color: #626262;
+}

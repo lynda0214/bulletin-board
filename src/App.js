@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import {useContext} from 'react';
+import {Stage, Layer, Image, Text} from 'react-konva';
+import useImage from "use-image";
+import {ModeContext} from './store/ModeProvider';
+import Toolbar from './toolbar/Toolbar';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const KittenImage = () => {
+    const IMG_WIDTH = 400;
+    const IMG_HEIGHT = 300;
+    const [image] = useImage(`https://placekitten.com/${IMG_WIDTH}/${IMG_HEIGHT}`);
+    return <Image
+        x={Math.floor(Math.random() * (window.innerWidth - IMG_WIDTH))}
+        y={Math.floor(Math.random() * (window.innerHeight - IMG_HEIGHT))}
+        draggable
+        image={image}
+    />;
+};
+
+const App = () => {
+    return (
+        <>
+            <Toolbar/>
+            <Stage width={window.innerWidth} height={window.innerHeight}>
+                <Layer>
+                    <KittenImage/>
+                    <KittenImage/>
+                </Layer>
+            </Stage>
+        </>
+    );
+};
 
 export default App;
