@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import {useState, createContext} from 'react';
 
 export const MODE = {
     POINTER: 'pointer',
@@ -7,13 +7,17 @@ export const MODE = {
     MAGNIFIER: 'magnifier',
 };
 
-export const ModeContext = createContext({});
+export const ModeContext = createContext({
+    mode: '',
+    switchMode: () => {
+    }
+});
 
-const ModeProvider = ({ children }) => {
+const ModeProvider = ({children}) => {
     const [mode, setMode] = useState(MODE.POINTER);
     const defaultValue = {
         mode,
-        setMode,
+        switchMode: (targetMode) => setMode(targetMode),
     };
     return (
         <ModeContext.Provider value={defaultValue}>

@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import classNames from 'classnames';
-import {MODE, ModeContext} from '../store/ModeProvider';
+import {MODE, ModeContext} from '../contexts/ModeProvider';
 import {FaMousePointer, FaComment, FaHandPaper, FaSearch} from 'react-icons/fa';
 import "./Toolbar.css";
 
@@ -12,12 +12,7 @@ const SUPPORT_MODES = [
 ];
 
 const Toolbar = () => {
-    const {mode, setMode} = useContext(ModeContext);
-
-    const switchMode = (targetMode) => {
-        setMode(targetMode);
-    };
-
+    const {mode, switchMode} = useContext(ModeContext);
     return (
         <div className="toolbar">
             <div className="toolbar__panel">

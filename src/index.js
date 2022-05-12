@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ModeProvider from './store/ModeProvider';
+import ModeProvider from './contexts/ModeProvider';
+import CanvasStatusProvider from './contexts/CanvasStatusProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <ModeProvider>
-          <App />
+          <CanvasStatusProvider>
+              <App />
+          </CanvasStatusProvider>
       </ModeProvider>
   </React.StrictMode>
 );

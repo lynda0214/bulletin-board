@@ -1,30 +1,50 @@
-import {useContext} from 'react';
-import {Stage, Layer, Image, Text} from 'react-konva';
-import useImage from "use-image";
-import {ModeContext} from './store/ModeProvider';
+import {useContext, useState} from 'react';
+import Konva from 'konva';
+import {Stage, Layer, Rect} from 'react-konva';
+import {MODE, ModeContext} from './contexts/ModeProvider';
+import {CanvasStatusContext} from './contexts/CanvasStatusProvider';
 import Toolbar from './toolbar/Toolbar';
+import MyImage from './components/MyImage';
+import {ID_PREFIX} from './constants';
 import './App.css';
 
-const KittenImage = () => {
-    const IMG_WIDTH = 400;
-    const IMG_HEIGHT = 300;
-    const [image] = useImage(`https://placekitten.com/${IMG_WIDTH}/${IMG_HEIGHT}`);
-    return <Image
-        x={Math.floor(Math.random() * (window.innerWidth - IMG_WIDTH))}
-        y={Math.floor(Math.random() * (window.innerHeight - IMG_HEIGHT))}
-        draggable
-        image={image}
-    />;
-};
-
 const App = () => {
+    const {mode} = useContext(ModeContext);
+    const {canvas, images, comments, addComment} = useContext(CanvasStatusContext);
+
+    const handleClick = (event) => {
+        if (mode !== MODE.COMMENT || event.target.id().includes(ID_PREFIX.COMMENT)) {
+            return;
+        }
+        const {x, y} = event.target.getStage().getPointerPosition();
+        const newAnchor = {
+            id: `${ID_PREFIX.COMMENT}_${x}_${y}`,
+            parentId: event.target.id(),
+            width: 10,
+            height: 10,
+            fill: Konva.Util.getRandomColor(),
+            x: x,
+            y: y
+        }
+        addComment(newAnchor);
+        console.log(
+            event.target.id(),
+            event.target.getStage().getPointerPosition().x,
+            event.target.getStage().getPointerPosition().y
+        );
+    }
+
     return (
         <>
             <Toolbar/>
-            <Stage width={window.innerWidth} height={window.innerHeight}>
+            <Stage id={ID_PREFIX.CANVAS} width={window.innerWidth} height={window.innerHeight} onMouseDown={handleClick}>
                 <Layer>
-                    <KittenImage/>
-                    <KittenImage/>
+                    {images.map((image) =>
+                        <MyImage key={image.id} mode={mode} {...image}/>
+                    )}
+                    {comments.map((comment) =>
+                        <Rect key={comment.id} {...comment}/>
+                    )}
                 </Layer>
             </Stage>
         </>
