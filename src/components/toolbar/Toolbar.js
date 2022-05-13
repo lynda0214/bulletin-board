@@ -1,6 +1,6 @@
 import {useContext} from 'react';
 import classNames from 'classnames';
-import {MODE, ModeContext} from '../contexts/ModeProvider';
+import {MODE, ModeContext} from '../../contexts/ModeProvider';
 import {FaMousePointer, FaComment, FaHandPaper, FaSearch} from 'react-icons/fa';
 import "./Toolbar.css";
 

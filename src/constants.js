@@ -1,7 +1,7 @@
 export const ID_PREFIX = {
     CANVAS: 'canvas',
-    IMAGE: 'image',
+    PICTURE: 'picture',
     COMMENT: 'comment'
 }
-export const IMAGE_WIDTH = 400;
-export const IMAGE_HEIGHT = 300;
+export const PICTURE_WIDTH = 400;
+export const PICTURE_HEIGHT = 300;

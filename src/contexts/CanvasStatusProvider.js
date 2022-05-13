@@ -7,17 +7,17 @@ const CanvasStatusProvider = ({children}) => {
     const [state, dispatch] = useReducer(CanvasStatusReducer, initialState);
     const defaultValue = {
         canvas: state.canvas,
-        images: state.images,
+        pictures: state.pictures,
         comments: state.comments,
-        updateImagePosition: (id, x, y) => {
+        updatePicturePosition: (id, x, y) => {
             dispatch({
-                type: ACTIONS.UPDATE_IMAGE_POSITION,
+                type: ACTIONS.UPDATE_PICTURE_POSITION,
                 payload: {id, x, y}
             });
         },
-        removeImage: (id) => {
+        removePicture: (id) => {
             dispatch({
-                type: ACTIONS.REMOVE_IMAGE,
+                type: ACTIONS.REMOVE_PICTURE,
                 payload: id
             });
         },

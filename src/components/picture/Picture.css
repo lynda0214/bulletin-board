@@ -1,0 +1,7 @@
+.picture__remove-button {
+    color: #0D99FF;
+}
+
+.picture__remove-button:hover {
+    color: #5cb4ff;
+}
