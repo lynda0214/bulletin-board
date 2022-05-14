@@ -1,11 +1,5 @@
 import {useState, createContext} from 'react';
-
-export const MODE = {
-    POINTER: 'pointer',
-    COMMENT: 'comment',
-    HAND: 'hand',
-    MAGNIFIER: 'magnifier',
-};
+import {MODE} from '../constants';
 
 export const ModeContext = createContext({
     mode: '',

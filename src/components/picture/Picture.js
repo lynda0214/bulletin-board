@@ -3,7 +3,7 @@ import useImage from 'use-image';
 import {Group, Image, Rect} from 'react-konva';
 import {Html} from 'react-konva-utils';
 import {FaTimesCircle} from 'react-icons/fa';
-import {MODE} from '../../contexts/ModeProvider';
+import {MODE} from '../../constants';
 import {PICTURE_HEIGHT, PICTURE_WIDTH} from '../../constants';
 import './Picture.css';
 

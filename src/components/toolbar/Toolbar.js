@@ -1,8 +1,9 @@
 import {useContext} from 'react';
 import classNames from 'classnames';
-import {MODE, ModeContext} from '../../contexts/ModeProvider';
+import {ModeContext} from '../../contexts/ModeProvider';
 import {FaMousePointer, FaComment, FaHandPaper, FaSearch} from 'react-icons/fa';
-import "./Toolbar.css";
+import {MODE} from '../../constants';
+import './Toolbar.css';
 
 const SUPPORT_MODES = [
     MODE.POINTER,

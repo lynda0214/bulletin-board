@@ -1,19 +1,28 @@
 import {useContext, useState} from 'react';
 import Konva from 'konva';
 import {Stage, Layer, Rect} from 'react-konva';
-import {MODE, ModeContext} from './contexts/ModeProvider';
+import {ModeContext} from './contexts/ModeProvider';
 import {CanvasStatusContext} from './contexts/CanvasStatusProvider';
 import Toolbar from './components/toolbar/Toolbar';
 import Picture from './components/picture/Picture';
-import {ID_PREFIX} from './constants';
+import {MODE, ID_PREFIX} from './constants';
 import './App.css';
+
+const GET_CURSOR_PATH = {
+    [MODE.COMMENT]: () => `url('cursor/comment.png')`,
+    [MODE.POINTER]: () => `url('cursor/pointer.png')`,
+    [MODE.HAND]: (isClicking) => isClicking ? `url('cursor/hand-rock.png')`: `url('cursor/hand-paper.png')`,
+    [MODE.MAGNIFIER]: () => `url('cursor/magnifier.png')`,
+};
 
 const App = () => {
     const {mode} = useContext(ModeContext);
     const {pictures, comments, updatePicturePosition, removePicture, addComment} = useContext(CanvasStatusContext);
     const [selectID, setSelectID] = useState(ID_PREFIX.CANVAS);
+    const [isClicking, setIsClicking] = useState(false);
 
     const handleClick = (event) => {
+        setIsClicking(true);
         if (mode === MODE.POINTER) {
             setSelectID(event.target.id());
         }
@@ -39,14 +48,19 @@ const App = () => {
         addComment(newAnchor);
     }
 
+    const handleUnclick = () => {
+        setIsClicking(false);
+    }
+
     return (
-        <>
+        <div style={{cursor: `${GET_CURSOR_PATH[mode](isClicking)},auto`}}>
             <Toolbar/>
             <Stage id={ID_PREFIX.CANVAS}
                    width={window.innerWidth}
                    height={window.innerHeight}
                    draggable={mode === 'hand'}
                    onMouseDown={handleClick}
+                   onMouseUp={handleUnclick}
             >
                 <Layer>
                     {pictures.map((picture) =>
@@ -68,7 +82,7 @@ const App = () => {
                     )}
                 </Layer>
             </Stage>
-        </>
+        </div>
     );
 };
 
