@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import useImage from 'use-image';
-import {Group, Image, Rect} from 'react-konva';
+import {Group, Image} from 'react-konva';
 import {Html} from 'react-konva-utils';
 import {FaTimesCircle} from 'react-icons/fa';
-import {MODE} from '../../constants';
-import {PICTURE_HEIGHT, PICTURE_WIDTH} from '../../constants';
+import Comment from '../comment/Comment';
+import {MODE, PICTURE_HEIGHT, PICTURE_WIDTH} from '../../constants';
 import './Picture.css';
 
 const Picture = ({
@@ -32,9 +32,6 @@ const Picture = ({
         if (isDragging) return;
         removePicture(id);
     };
-    const onMouseDownHandler = (event) => {
-
-    }
     return (
         <Group
             x={x}
@@ -42,7 +39,6 @@ const Picture = ({
             draggable={mode === MODE.POINTER}
             onDragStart={onDragStartHandler}
             onDragEnd={onDragEndHandler}
-            onMouseDown={onMouseDownHandler}
         >
             <Image
                 id={id}
@@ -51,8 +47,10 @@ const Picture = ({
                 stroke="#0D99FF"
             />
             {comments.map((comment) =>
-                <Rect {...comment}
-                      key={comment.id}
+                <Comment
+                    key={comment.id}
+                    comment={comment}
+                    mode={mode}
                 />
             )}
             {isSelecting &&

@@ -4,6 +4,11 @@ export const MODE = {
     HAND: 'hand',
     MAGNIFIER: 'magnifier',
 };
+export const USER = {
+  LYNDA: 'Lynda Lin',
+  NICK: 'Nick Tsygankov',
+  DAVID: 'David Canning'
+};
 export const ID_PREFIX = {
     CANVAS: 'canvas',
     PICTURE: 'picture',

@@ -7,16 +7,17 @@ import Toolbar from './components/toolbar/Toolbar';
 import Picture from './components/picture/Picture';
 import {MODE, ID_PREFIX} from './constants';
 import './App.css';
+import Comment from "./components/comment/Comment";
 
 const GET_CURSOR_PATH = {
     [MODE.COMMENT]: () => `url('cursor/comment.png')`,
     [MODE.POINTER]: () => `url('cursor/pointer.png')`,
-    [MODE.HAND]: (isClicking) => isClicking ? `url('cursor/hand-rock.png')`: `url('cursor/hand-paper.png')`,
+    [MODE.HAND]: (isClicking) => isClicking ? `url('cursor/hand-rock.png')` : `url('cursor/hand-paper.png')`,
     [MODE.MAGNIFIER]: () => `url('cursor/magnifier.png')`,
 };
 
 const App = () => {
-    const {mode} = useContext(ModeContext);
+    const {mode, user} = useContext(ModeContext);
     const {pictures, comments, updatePicturePosition, removePicture, addComment} = useContext(CanvasStatusContext);
     const [selectID, setSelectID] = useState(ID_PREFIX.CANVAS);
     const [isClicking, setIsClicking] = useState(false);
@@ -43,7 +44,8 @@ const App = () => {
             height: 10,
             fill: Konva.Util.getRandomColor(),
             x: x,
-            y: y
+            y: y,
+            starter: user
         }
         addComment(newAnchor);
     }
@@ -76,10 +78,12 @@ const App = () => {
                     {comments
                         .filter((comment) => comment.parentId === ID_PREFIX.CANVAS)
                         .map((comment) =>
-                        <Rect key={comment.id}
-                              {...comment}
-                        />
-                    )}
+                            <Comment
+                                key={comment.id}
+                                comment={comment}
+                                mode={mode}
+                            />
+                        )}
                 </Layer>
             </Stage>
         </div>

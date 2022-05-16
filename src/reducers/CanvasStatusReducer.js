@@ -51,7 +51,8 @@ const CanvasStatusReducer = (state, action) => {
         case ACTIONS.REMOVE_PICTURE:
             return {
                 ...state,
-                pictures: state.pictures.filter((picture) => (picture.id !== payload))
+                pictures: state.pictures.filter((picture) => (picture.id !== payload)),
+                comments: state.comments.filter((comment) => (comment.parentId !== payload)),
             };
         case ACTIONS.ADD_COMMENT:
             return {
