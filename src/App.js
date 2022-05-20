@@ -1,26 +1,25 @@
 import {useContext, useState} from 'react';
 import Konva from 'konva';
-import {Stage, Layer, Rect} from 'react-konva';
+import {Stage} from 'react-konva';
 import {ModeContext} from './contexts/ModeProvider';
-import {CanvasStatusContext} from './contexts/CanvasStatusProvider';
+import CanvasStatusProvider from './contexts/CanvasStatusProvider';
 import Toolbar from './components/toolbar/Toolbar';
-import Picture from './components/picture/Picture';
+import Canvas from './components/canvas/Canvas';
 import {MODE, ID_PREFIX} from './constants';
 import './App.css';
-import Comment from "./components/comment/Comment";
 
 const GET_CURSOR_PATH = {
-    [MODE.COMMENT]: () => `url('cursor/comment.png')`,
-    [MODE.POINTER]: () => `url('cursor/pointer.png')`,
-    [MODE.HAND]: (isClicking) => isClicking ? `url('cursor/hand-rock.png')` : `url('cursor/hand-paper.png')`,
-    [MODE.MAGNIFIER]: () => `url('cursor/magnifier.png')`,
+    [MODE.COMMENT]: () => `url('cursor/comment.png') 0 14,auto`,
+    [MODE.POINTER]: () => `url('cursor/pointer.png'),auto`,
+    [MODE.HAND]: (isClicking) => isClicking ? `url('cursor/hand-rock.png'),auto` : `url('cursor/hand-paper.png'),auto`,
+    [MODE.MAGNIFIER]: () => `url('cursor/magnifier.png'),auto`,
 };
 
 const App = () => {
     const {mode, user} = useContext(ModeContext);
-    const {pictures, comments, updatePicturePosition, removePicture, addComment} = useContext(CanvasStatusContext);
-    const [selectID, setSelectID] = useState(ID_PREFIX.CANVAS);
     const [isClicking, setIsClicking] = useState(false);
+    const [selectID, setSelectID] = useState(ID_PREFIX.CANVAS);
+    const [newComment, setNewComment] = useState(null);
 
     const handleClick = (event) => {
         setIsClicking(true);
@@ -45,9 +44,10 @@ const App = () => {
             fill: Konva.Util.getRandomColor(),
             x: x,
             y: y,
-            starter: user
+            starter: user,
+            thread: [],
         }
-        addComment(newAnchor);
+        setNewComment(newAnchor);
     }
 
     const handleUnclick = () => {
@@ -55,36 +55,19 @@ const App = () => {
     }
 
     return (
-        <div style={{cursor: `${GET_CURSOR_PATH[mode](isClicking)},auto`}}>
+        <div style={{cursor: `${GET_CURSOR_PATH[mode](isClicking)}`}}>
             <Toolbar/>
-            <Stage id={ID_PREFIX.CANVAS}
-                   width={window.innerWidth}
-                   height={window.innerHeight}
-                   draggable={mode === 'hand'}
-                   onMouseDown={handleClick}
-                   onMouseUp={handleUnclick}
+            <Stage
+                id={ID_PREFIX.CANVAS}
+                width={window.innerWidth}
+                height={window.innerHeight}
+                draggable={mode === 'hand'}
+                onMouseDown={handleClick}
+                onMouseUp={handleUnclick}
             >
-                <Layer>
-                    {pictures.map((picture) =>
-                        <Picture key={picture.id}
-                                 mode={mode}
-                                 isSelecting={picture.id === selectID}
-                                 comments={comments.filter((comment) => comment.parentId === picture.id)}
-                                 updatePicturePosition={updatePicturePosition}
-                                 removePicture={removePicture}
-                                 {...picture}
-                        />
-                    )}
-                    {comments
-                        .filter((comment) => comment.parentId === ID_PREFIX.CANVAS)
-                        .map((comment) =>
-                            <Comment
-                                key={comment.id}
-                                comment={comment}
-                                mode={mode}
-                            />
-                        )}
-                </Layer>
+                <CanvasStatusProvider>
+                    <Canvas selectID={selectID} mode={mode} currentUser={user} newComment={newComment}/>
+                </CanvasStatusProvider>
             </Stage>
         </div>
     );

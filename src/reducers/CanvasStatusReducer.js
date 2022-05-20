@@ -1,4 +1,4 @@
-import {ID_PREFIX, PICTURE_HEIGHT, PICTURE_WIDTH} from "../constants";
+import {ID_PREFIX, PICTURE_HEIGHT, PICTURE_WIDTH} from '../constants';
 
 export const initialState = {
     canvas: [
@@ -30,14 +30,14 @@ export const ACTIONS = {
     REMOVE_PICTURE: 'REMOVE_PICTURE',
     ADD_COMMENT: 'ADD_COMMENT',
     REMOVE_COMMENT: 'REMOVE_COMMENT',
-    PAN_CANVAS: 'PAN_STAGE',
-    ZOOM_CANVAS: 'ZOOM_CANVAS'
+    UPDATE_COMMENT_THREAD: 'UPDATE_COMMENT_THREAD',
+    ZOOM_CANVAS: 'ZOOM_CANVAS',
 };
 
 const CanvasStatusReducer = (state, action) => {
     const {type, payload} = action;
     switch (type) {
-        case ACTIONS.UPDATE_PICTURE_POSITION:
+        case ACTIONS.UPDATE_PICTURE_POSITION: {
             const {id, x, y} = payload;
             const targetPicture = state.pictures.find((picture) => (picture.id === id));
             const restPictures = state.pictures.filter((picture) => (picture.id !== id));
@@ -48,6 +48,7 @@ const CanvasStatusReducer = (state, action) => {
                     {...targetPicture, x, y}
                 ]
             };
+        }
         case ACTIONS.REMOVE_PICTURE:
             return {
                 ...state,
@@ -61,8 +62,24 @@ const CanvasStatusReducer = (state, action) => {
             };
         case ACTIONS.REMOVE_COMMENT:
             return {
-                // todo
+                ...state,
+                comments: state.comments.filter((comment) => (comment.id !== payload)),
             };
+        case ACTIONS.UPDATE_COMMENT_THREAD: {
+            const {id, user, timestamp, content} = payload;
+            const targetComment = state.comments.find((comment) => (comment.id === id));
+            const restComments = state.comments.filter((comment) => (comment.id !== id));
+            return {
+                ...state,
+                comments: [
+                    ...restComments,
+                    {
+                        ...targetComment,
+                        thread: [...targetComment.thread, {user, timestamp, content}],
+                    },
+                ]
+            };
+        }
         default:
             return state;
     }

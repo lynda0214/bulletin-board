@@ -32,7 +32,13 @@ const CanvasStatusProvider = ({children}) => {
                 type: ACTIONS.REMOVE_COMMENT,
                 payload: id
             });
-        }
+        },
+        updateCommentThread: (id, user, timestamp, content) => {
+            dispatch({
+                type: ACTIONS.UPDATE_COMMENT_THREAD,
+                payload: {id, user, timestamp, content}
+            });
+        },
     };
     return (
         <CanvasStatusContext.Provider value={defaultValue}>

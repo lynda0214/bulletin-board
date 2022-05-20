@@ -1,8 +1,9 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import useImage from 'use-image';
 import {Group, Image} from 'react-konva';
 import {Html} from 'react-konva-utils';
 import {FaTimesCircle} from 'react-icons/fa';
+import {CanvasStatusContext} from '../../contexts/CanvasStatusProvider';
 import Comment from '../comment/Comment';
 import {MODE, PICTURE_HEIGHT, PICTURE_WIDTH} from '../../constants';
 import './Picture.css';
@@ -12,11 +13,11 @@ const Picture = ({
                      x,
                      y,
                      mode,
+                     currentUser,
                      isSelecting,
                      comments,
-                     updatePicturePosition,
-                     removePicture,
                  }) => {
+    const {updatePicturePosition, removePicture} = useContext(CanvasStatusContext);
     const [isDragging, setIsDragging] = useState(false);
     const [image] = useImage(`https://placekitten.com/${PICTURE_WIDTH}/${PICTURE_HEIGHT}`);
     const onDragStartHandler = () => {
@@ -51,6 +52,7 @@ const Picture = ({
                     key={comment.id}
                     comment={comment}
                     mode={mode}
+                    currentUser={currentUser}
                 />
             )}
             {isSelecting &&
