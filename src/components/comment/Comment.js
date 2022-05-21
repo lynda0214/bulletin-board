@@ -116,10 +116,10 @@ const CommentThread = ({commentId, starter, currentUser, thread, setCommentStage
                             content={message.content}
                         />
                     )}
-                    <div>
+                    {/*<div>*/}
                         <NewMessage commentId={commentId} currentUser={currentUser}
                                     updateCommentThread={updateCommentThread}/>
-                    </div>
+                    {/*</div>*/}
                 </div>
             </div>
         </Html>

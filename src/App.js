@@ -1,6 +1,7 @@
 import {useContext, useState, useRef} from 'react';
 import Konva from 'konva';
 import {Stage} from 'react-konva';
+import moment from 'moment';
 import {ModeContext} from './contexts/ModeProvider';
 import CanvasStatusProvider from './contexts/CanvasStatusProvider';
 import Toolbar from './components/toolbar/Toolbar';
@@ -9,6 +10,7 @@ import {MODE, ID_PREFIX} from './constants';
 import './App.css';
 
 const GET_CURSOR_PATH = {
+    [MODE.PICTURE]: () => `url('cursor/picture.png'),auto`,
     [MODE.COMMENT]: () => `url('cursor/comment.png') 0 14,auto`,
     [MODE.POINTER]: () => `url('cursor/pointer.png'),auto`,
     [MODE.HAND]: (isClicking) => isClicking ? `url('cursor/hand-rock.png'),auto` : `url('cursor/hand-paper.png'),auto`,
@@ -23,34 +25,48 @@ const App = () => {
     const [isClicking, setIsClicking] = useState(false);
     const [selectID, setSelectID] = useState(ID_PREFIX.CANVAS);
     const [newComment, setNewComment] = useState(null);
+    const [newPicture, setNewPicture] = useState(null);
 
     const handleClick = (event) => {
         setIsClicking(true);
-        if (mode === MODE.POINTER) {
-            setSelectID(event.target.id());
+        switch(mode) {
+            case MODE.POINTER:
+                setSelectID(event.target.id());
+                return;
+            case MODE.COMMENT: {
+                if (event.target.id().includes(ID_PREFIX.COMMENT)) return;
+                let {x, y} = event.target.getStage().getRelativePointerPosition();
+                if (event.target.id() !== ID_PREFIX.CANVAS) { // position calibration
+                    x -= event.target.parent.x();
+                    y -= event.target.parent.y();
+                }
+                const newAnchor = {
+                    id: `${ID_PREFIX.COMMENT}_${x}_${y}`,
+                    parentId: event.target.id(),
+                    width: 10,
+                    height: 10,
+                    fill: Konva.Util.getRandomColor(),
+                    x: x,
+                    y: y,
+                    starter: user,
+                    thread: [],
+                }
+                setNewComment(newAnchor);
+                return;
+            }
+            case MODE.PICTURE: {
+                let {x, y} = event.target.getStage().getRelativePointerPosition();
+                const newAnchor = {
+                    id: `${ID_PREFIX.PICTURE}_${x}_${y}_${moment().format('X')}`,
+                    x: x,
+                    y: y
+                }
+                setNewPicture(newAnchor);
+                return;
+            }
+            default:
+                return;
         }
-        if (mode !== MODE.COMMENT || event.target.id().includes(ID_PREFIX.COMMENT)) {
-            return;
-        }
-
-        let {x, y} = event.target.getStage().getRelativePointerPosition();
-        if (event.target.id() !== ID_PREFIX.CANVAS) { // position calibration
-            x -= event.target.parent.x();
-            y -= event.target.parent.y();
-        }
-
-        const newAnchor = {
-            id: `${ID_PREFIX.COMMENT}_${x}_${y}`,
-            parentId: event.target.id(),
-            width: 10,
-            height: 10,
-            fill: Konva.Util.getRandomColor(),
-            x: x,
-            y: y,
-            starter: user,
-            thread: [],
-        }
-        setNewComment(newAnchor);
     }
 
     const handleUnclick = () => {
@@ -90,7 +106,7 @@ const App = () => {
                 onMouseUp={handleUnclick}
             >
                 <CanvasStatusProvider>
-                    <Canvas selectID={selectID} mode={mode} currentUser={user} newComment={newComment}/>
+                    <Canvas selectID={selectID} mode={mode} currentUser={user} newComment={newComment} newPicture={newPicture}/>
                 </CanvasStatusProvider>
             </Stage>
         </div>

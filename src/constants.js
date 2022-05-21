@@ -1,4 +1,5 @@
 export const MODE = {
+    PICTURE: 'picture',
     POINTER: 'pointer',
     COMMENT: 'comment',
     HAND: 'hand',

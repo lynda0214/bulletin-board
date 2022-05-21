@@ -9,16 +9,22 @@ const CanvasStatusProvider = ({children}) => {
         canvas: state.canvas,
         pictures: state.pictures,
         comments: state.comments,
-        updatePicturePosition: (id, x, y) => {
+        addPicture: (newPicture) => {
             dispatch({
-                type: ACTIONS.UPDATE_PICTURE_POSITION,
-                payload: {id, x, y}
-            });
+                type: ACTIONS.ADD_PICTURE,
+                payload: newPicture
+            })
         },
         removePicture: (id) => {
             dispatch({
                 type: ACTIONS.REMOVE_PICTURE,
                 payload: id
+            });
+        },
+        updatePicturePosition: (id, x, y) => {
+            dispatch({
+                type: ACTIONS.UPDATE_PICTURE_POSITION,
+                payload: {id, x, y}
             });
         },
         addComment: (newComment) => {
@@ -38,7 +44,7 @@ const CanvasStatusProvider = ({children}) => {
                 type: ACTIONS.UPDATE_COMMENT_THREAD,
                 payload: {id, user, timestamp, content}
             });
-        },
+        }
     };
     return (
         <CanvasStatusContext.Provider value={defaultValue}>

@@ -1,15 +1,15 @@
 import {useContext} from 'react';
 import classNames from 'classnames';
 import {ModeContext} from '../../contexts/ModeProvider';
-import {FaMousePointer, FaComment, FaHandPaper, FaSearch} from 'react-icons/fa';
+import {FaMousePointer, FaComment, FaHandPaper, FaImage} from 'react-icons/fa';
 import {MODE, USER} from '../../constants';
 import './Toolbar.css';
 
 const SUPPORT_MODES = [
     MODE.POINTER,
+    MODE.PICTURE,
     MODE.COMMENT,
-    MODE.HAND,
-    // MODE.MAGNIFIER,
+    MODE.HAND
 ];
 
 const Toolbar = () => {
@@ -37,10 +37,10 @@ export default Toolbar;
 
 const ModeButton = ({title, switchMode, isSelected}) => {
     const modeIcons = {
+        [MODE.PICTURE]: <FaImage/>,
         [MODE.POINTER]: <FaMousePointer/>,
         [MODE.COMMENT]: <FaComment/>,
-        [MODE.HAND]: <FaHandPaper/>,
-        // [MODE.MAGNIFIER]: <FaSearch/>,
+        [MODE.HAND]: <FaHandPaper/>
     };
 
     return (

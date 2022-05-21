@@ -26,17 +26,29 @@ export const initialState = {
 }
 
 export const ACTIONS = {
-    UPDATE_PICTURE_POSITION: 'UPDATE_PICTURE_POSITION',
+    ADD_PICTURE: 'ADD_PICTURE',
     REMOVE_PICTURE: 'REMOVE_PICTURE',
+    UPDATE_PICTURE_POSITION: 'UPDATE_PICTURE_POSITION',
     ADD_COMMENT: 'ADD_COMMENT',
     REMOVE_COMMENT: 'REMOVE_COMMENT',
-    UPDATE_COMMENT_THREAD: 'UPDATE_COMMENT_THREAD',
-    ZOOM_CANVAS: 'ZOOM_CANVAS',
+    UPDATE_COMMENT_THREAD: 'UPDATE_COMMENT_THREAD'
 };
 
 const CanvasStatusReducer = (state, action) => {
     const {type, payload} = action;
     switch (type) {
+        case ACTIONS.ADD_PICTURE: {
+            return {
+                ...state,
+                pictures: [...state.pictures, payload]
+            }
+        }
+        case ACTIONS.REMOVE_PICTURE:
+            return {
+                ...state,
+                pictures: state.pictures.filter((picture) => (picture.id !== payload)),
+                comments: state.comments.filter((comment) => (comment.parentId !== payload)),
+            };
         case ACTIONS.UPDATE_PICTURE_POSITION: {
             const {id, x, y} = payload;
             const targetPicture = state.pictures.find((picture) => (picture.id === id));
@@ -49,12 +61,6 @@ const CanvasStatusReducer = (state, action) => {
                 ]
             };
         }
-        case ACTIONS.REMOVE_PICTURE:
-            return {
-                ...state,
-                pictures: state.pictures.filter((picture) => (picture.id !== payload)),
-                comments: state.comments.filter((comment) => (comment.parentId !== payload)),
-            };
         case ACTIONS.ADD_COMMENT:
             return {
                 ...state,
@@ -80,6 +86,7 @@ const CanvasStatusReducer = (state, action) => {
                 ]
             };
         }
+
         default:
             return state;
     }

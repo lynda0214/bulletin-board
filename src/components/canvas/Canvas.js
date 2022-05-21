@@ -5,17 +5,23 @@ import Picture from '../picture/Picture';
 import Comment from '../comment/Comment';
 import {ID_PREFIX} from '../../constants';
 
-const Canvas = ({mode, currentUser, selectID, newComment}) => {
+const Canvas = ({mode, currentUser, selectID, newComment, newPicture}) => {
     const {
         pictures,
         comments,
         addComment,
+        addPicture
     } = useContext(CanvasStatusContext);
 
     useEffect(() => {
         if (!newComment) return;
         addComment(newComment);
     }, [newComment]);
+
+    useEffect(() => {
+        if (!newPicture) return;
+        addPicture(newPicture);
+    }, [newPicture]);
 
     return (
         <Layer>
