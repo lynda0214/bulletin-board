@@ -67,13 +67,13 @@ const CommentCollapsed = ({starter, setCommentStage}) => {
     return (
         <Html divProps={{
             style: {
-                position: 'absolute',
-                top: '-18px',
-                left: '50px'
+                position: 'absolute'
             }
         }}>
-            <div className="comment__avatar comment__avatar--collapsed" onClick={openThread}>
-                {starter.charAt(0).toUpperCase()}
+            <div className="comment-collapsed">
+                <div className="comment__avatar comment__avatar--collapsed" onClick={openThread}>
+                    {starter.charAt(0).toUpperCase()}
+                </div>
             </div>
         </Html>
     );
@@ -92,9 +92,7 @@ const CommentThread = ({commentId, starter, currentUser, thread, setCommentStage
     return (
         <Html divProps={{
             style: {
-                position: 'absolute',
-                top: '-18px',
-                left: '50px'
+                position: 'absolute'
             }
         }}>
             <div className="comment-thread">
@@ -194,9 +192,7 @@ const CommentStarter = ({commentId, starter, setCommentStage}) => {
     return (
         <Html divProps={{
             style: {
-                position: 'absolute',
-                top: '-18px',
-                left: '50px'
+                position: 'absolute'
             }
         }}>
             <div className="comment-starter">

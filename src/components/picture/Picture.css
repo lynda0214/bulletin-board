@@ -1,4 +1,7 @@
 .picture__remove-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
     color: #0D99FF;
 }
 

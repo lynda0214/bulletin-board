@@ -19,6 +19,12 @@
     user-select: none; /* Standard */
 }
 
+.comment-collapsed {
+    position: absolute;
+    left: 50px;
+    top: -18px;
+}
+
 .comment__avatar--collapsed:hover {
     background-color: #0c77c5;
 }
@@ -34,6 +40,9 @@
 }
 
 .comment-starter {
+    position: absolute;
+    left: 50px;
+    top: -18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,6 +78,9 @@
 }
 
 .comment-thread {
+    position: absolute;
+    left: 50px;
+    top: -18px;
     display: flex;
     justify-content: flex-start;
 }

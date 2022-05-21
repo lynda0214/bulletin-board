@@ -60,12 +60,12 @@ const Picture = ({
                     divProps={{
                         style: {
                             position: 'absolute',
-                            left: `${PICTURE_WIDTH - 30}px`,
-                            top: '10px',
-                        },
-                        className: 'picture__remove-button'
+                            width: `${PICTURE_WIDTH}px`
+                        }
                     }}>
-                    <FaTimesCircle onClick={() => onClickRemove(id)}/>
+                    <div className="picture__remove-button">
+                        <FaTimesCircle onClick={() => onClickRemove(id)}/>
+                    </div>
                 </Html>
             }
         </Group>

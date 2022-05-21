@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import {useContext, useState, useRef} from 'react';
 import Konva from 'konva';
 import {Stage} from 'react-konva';
 import {ModeContext} from './contexts/ModeProvider';
@@ -15,7 +15,10 @@ const GET_CURSOR_PATH = {
     [MODE.MAGNIFIER]: () => `url('cursor/magnifier.png'),auto`,
 };
 
+const SCALE_BY = 1.01;
+
 const App = () => {
+    const stageRef = useRef(null);
     const {mode, user} = useContext(ModeContext);
     const [isClicking, setIsClicking] = useState(false);
     const [selectID, setSelectID] = useState(ID_PREFIX.CANVAS);
@@ -54,14 +57,35 @@ const App = () => {
         setIsClicking(false);
     }
 
+    const handleScroll = (event) => {
+        event.evt.preventDefault();
+        if (!stageRef.current) return;
+        const stage = stageRef.current;
+        const oldScale = stage.scaleX();
+        const {x: pointerX, y: pointerY} = stage.getPointerPosition();
+        const mousePointTo = {
+            x: (pointerX - stage.x()) / oldScale,
+            y: (pointerY - stage.y()) / oldScale,
+        };
+        const newScale = event.evt.deltaY > 0 ? oldScale * SCALE_BY : oldScale / SCALE_BY;
+        stage.scale({ x: newScale, y: newScale });
+        const newPos = {
+            x: pointerX - mousePointTo.x * newScale,
+            y: pointerY - mousePointTo.y * newScale,
+        }
+        stage.position(newPos);
+    }
+
     return (
         <div style={{cursor: `${GET_CURSOR_PATH[mode](isClicking)}`}}>
             <Toolbar/>
             <Stage
+                ref={stageRef}
                 id={ID_PREFIX.CANVAS}
                 width={window.innerWidth}
                 height={window.innerHeight}
                 draggable={mode === 'hand'}
+                onWheel={handleScroll}
                 onMouseDown={handleClick}
                 onMouseUp={handleUnclick}
             >
