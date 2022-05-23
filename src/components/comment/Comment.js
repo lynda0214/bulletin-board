@@ -175,7 +175,7 @@ const NewMessage = ({commentId, currentUser, updateCommentThread}) => {
     };
     const submit = () => {
         const content = inputRef.current.value.trim();
-        const timestamp = moment().format('X');
+        const timestamp = new Date().getTime();
         if (content === '') {
             return;
         }
