@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Welcome to Phase-Comments
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br/>
+Mainly powered by [react-konva](https://github.com/konvajs/react-konva)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The demo page is [here](https://lynda0214.github.io/phase-comments/)
+
+# Features
+## Generics
+scroll up and down can zoom out and in the while canvas
+
+## Toolbar
+In the downside, there's a toolbar.
+1) A dropdown is for switching users.
+2) buttons are for mode switch.
+   1) Pointer: select a picture and drag it, delete it
+   2) Picture: place another picture
+   3) Comment: insert a new comment to the canvas or to the picture 
+   4) Hand: drag and drop the whole canvas
+
+## Picture
+1) select it with pointer can a highlight outline and a remove button will show
+2) click on the remove button can remove the picture
+3) drag the picture will also reposition all the comments belong to it
+4) delete the picture will also delete all the comments belong to it
+
+## Comment
+1) the initially added comment shows a starter layout for the current user to input the very first message
+2) the avatar is representing the current user who added this comment
+3) if the very first submitted message is empty then the comment would be removed 
+4) messages can either be entered to submit or by clicking on the submit button
+5) once the very first message is submitted, the layout would collapse
+6) click on the collapsed layout avatar can open the comment thread layout
+7) in the comment thread layout, there are two buttons resolve and close
+8) click on the resolve button can also delete this comment
+9) click on the close button can close the thread layout and back to the collapsed layout
+10) in the bottom of the comment thread you can type new replies to this comment
+11) if you switch user, the avatar of the reply message will change accordingly
 
 ## Available Scripts
-
 In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1) Run `npm install` to installed necessary dependencies
+2) Run `npm run start` to see this app running on `localhost:3000`
+3) Run `npm run test` to see the test results 

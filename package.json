@@ -2,6 +2,7 @@
   "name": "phase-comments",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lynda0214.github.io/phase-comments/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
@@ -23,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -54,9 +57,12 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^4.0.0",
     "webpack": "^5.72.0"
   },
   "jest": {
-    "transformIgnorePatterns": ["<rootDir>/node\\_modules/(?!(lodash-es|other-es-lib))"]
+    "transformIgnorePatterns": [
+      "<rootDir>/node\\_modules/(?!(lodash-es|other-es-lib))"
+    ]
   }
 }
