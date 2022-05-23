@@ -1,4 +1,5 @@
 import {useContext, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {Layer} from 'react-konva';
 import {CanvasStatusContext} from '../../contexts/CanvasStatusProvider';
 import Picture from '../picture/Picture';
@@ -46,6 +47,14 @@ const Canvas = ({mode, currentUser, selectID, newComment, newPicture}) => {
                 )}
         </Layer>
     );
+}
+
+Canvas.propTypes = {
+    mode: PropTypes.string.isRequired,
+    currentUser: PropTypes.string.isRequired,
+    selectID: PropTypes.string.isRequired,
+    newComment: PropTypes.object,
+    newPicture: PropTypes.object
 }
 
 export default Canvas;

@@ -1,4 +1,5 @@
 import {useContext, useState} from 'react';
+import PropTypes from 'prop-types';
 import useImage from 'use-image';
 import {Group, Image} from 'react-konva';
 import {Html} from 'react-konva-utils/es';
@@ -73,5 +74,15 @@ const Picture = ({
         </Group>
     );
 };
+
+Picture.propTypes = {
+    id: PropTypes.string.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    mode: PropTypes.string.isRequired,
+    currentUser: PropTypes.string.isRequired,
+    isSelecting: PropTypes.bool.isRequired,
+    comments: PropTypes.array.isRequired,
+}
 
 export default Picture;

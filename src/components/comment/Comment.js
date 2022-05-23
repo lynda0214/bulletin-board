@@ -1,4 +1,5 @@
 import {useState, useRef, useContext} from 'react';
+import PropTypes from 'prop-types';
 import {Circle, Group, Line} from 'react-konva';
 import {Html} from 'react-konva-utils/es';
 import moment from 'moment';
@@ -57,6 +58,12 @@ const Comment = ({
     );
 };
 
+Comment.propTypes = {
+    currentUser: PropTypes.string.isRequired,
+    comment: PropTypes.object.isRequired,
+    mode: PropTypes.string.isRequired
+}
+
 export default Comment;
 
 const CommentCollapsed = ({starter, setCommentStage}) => {
@@ -78,6 +85,11 @@ const CommentCollapsed = ({starter, setCommentStage}) => {
         </Html>
     );
 };
+
+CommentCollapsed.propTypes = {
+    starter: PropTypes.string.isRequired,
+    setCommentStage: PropTypes.func.isRequired
+}
 
 const CommentThread = ({commentId, starter, currentUser, thread, setCommentStage}) => {
     const {removeComment, updateCommentThread} = useContext(CanvasStatusContext);
@@ -124,6 +136,14 @@ const CommentThread = ({commentId, starter, currentUser, thread, setCommentStage
     );
 };
 
+CommentThread.propTypes = {
+    commentId: PropTypes.string.isRequired,
+    starter: PropTypes.string.isRequired,
+    currentUser: PropTypes.string.isRequired,
+    thread: PropTypes.array.isRequired,
+    setCommentStage: PropTypes.func.isRequired
+}
+
 const Message = ({user, timestamp, content}) => {
     return (
         <div className="message">
@@ -141,6 +161,12 @@ const Message = ({user, timestamp, content}) => {
     )
 };
 
+Message.propTypes = {
+    user: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired
+}
+
 const NewMessage = ({commentId, currentUser, updateCommentThread}) => {
     const inputRef = useRef(null);
     const pressEnterHandler = (event) => {
@@ -149,7 +175,7 @@ const NewMessage = ({commentId, currentUser, updateCommentThread}) => {
     };
     const submit = () => {
         const content = inputRef.current.value.trim();
-        const timestamp = new Date().getTime();
+        const timestamp = moment().format('X');
         if (content === '') {
             return;
         }
@@ -169,6 +195,12 @@ const NewMessage = ({commentId, currentUser, updateCommentThread}) => {
         </div>
     );
 };
+
+NewMessage.propTypes = {
+    commentId: PropTypes.string.isRequired,
+    currentUser: PropTypes.string.isRequired,
+    updateCommentThread: PropTypes.func.isRequired
+}
 
 const CommentStarter = ({commentId, starter, setCommentStage}) => {
     const {removeComment, updateCommentThread} = useContext(CanvasStatusContext);
@@ -206,3 +238,9 @@ const CommentStarter = ({commentId, starter, setCommentStage}) => {
         </Html>
     );
 };
+
+CommentStarter.propTypes = {
+    commentId: PropTypes.string.isRequired,
+    starter: PropTypes.string.isRequired,
+    setCommentStage: PropTypes.func.isRequired
+}

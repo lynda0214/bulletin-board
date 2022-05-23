@@ -1,4 +1,5 @@
 import {useContext} from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {ModeContext} from '../../contexts/ModeProvider';
 import {FaMousePointer, FaComment, FaHandPaper, FaImage} from 'react-icons/fa';
@@ -58,6 +59,12 @@ const ModeButton = ({title, switchMode, isSelected}) => {
     );
 }
 
+ModeButton.propTypes = {
+    title: PropTypes.string.isRequired,
+    switchMode: PropTypes.func.isRequired,
+    isSelected: PropTypes.bool.isRequired
+}
+
 const UserButton = ({user, switchUser}) => {
     const onChangeHandler = (event) => {
         switchUser(event.target.value);
@@ -76,3 +83,8 @@ const UserButton = ({user, switchUser}) => {
         </div>
     )
 };
+
+UserButton.propTypes = {
+    user: PropTypes.string.isRequired,
+    switchUser: PropTypes.func.isRequired
+}
