@@ -1,7 +1,7 @@
 import {useContext, useState} from 'react';
 import useImage from 'use-image';
 import {Group, Image} from 'react-konva';
-import {Html} from 'react-konva-utils';
+import {Html} from 'react-konva-utils/es';
 import {FaTimesCircle} from 'react-icons/fa';
 import {CanvasStatusContext} from '../../contexts/CanvasStatusProvider';
 import Comment from '../comment/Comment';
@@ -63,8 +63,10 @@ const Picture = ({
                             width: `${PICTURE_WIDTH}px`
                         }
                     }}>
-                    <div className="picture__remove-button">
-                        <FaTimesCircle onClick={() => onClickRemove(id)}/>
+                    <div data-testid="remove-button"
+                         className="picture__remove-button"
+                         onClick={() => onClickRemove(id)}>
+                        <FaTimesCircle/>
                     </div>
                 </Html>
             }

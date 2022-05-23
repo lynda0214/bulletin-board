@@ -93,7 +93,7 @@ const App = () => {
     }
 
     return (
-        <div style={{cursor: `${GET_CURSOR_PATH[mode](isClicking)}`}}>
+        <div data-testid="app" style={{cursor: `${GET_CURSOR_PATH[mode](isClicking)}`}}>
             <Toolbar/>
             <Stage
                 ref={stageRef}

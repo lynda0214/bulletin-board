@@ -1,11 +1,10 @@
 import {useState, useRef, useContext} from 'react';
 import {Circle, Group, Line} from 'react-konva';
-import {Html} from 'react-konva-utils';
+import {Html} from 'react-konva-utils/es';
 import moment from 'moment';
 import {FaArrowCircleUp, FaRegCheckCircle, FaTimes} from 'react-icons/fa';
 import {CanvasStatusContext} from '../../contexts/CanvasStatusProvider';
 import './Comment.css';
-
 
 const COMMEMT_STAGE = {
     STARTER: 'starter',
@@ -71,7 +70,8 @@ const CommentCollapsed = ({starter, setCommentStage}) => {
             }
         }}>
             <div className="comment-collapsed">
-                <div className="comment__avatar comment__avatar--collapsed" onClick={openThread}>
+                <div className="comment__avatar comment__avatar--collapsed" data-testid="open-collapsed-comment"
+                     onClick={openThread}>
                     {starter.charAt(0).toUpperCase()}
                 </div>
             </div>
@@ -95,17 +95,17 @@ const CommentThread = ({commentId, starter, currentUser, thread, setCommentStage
                 position: 'absolute'
             }
         }}>
-            <div className="comment-thread">
+            <div data-testid="comment-thread" className="comment-thread">
                 <div className="comment__avatar">
                     {starter.charAt(0).toUpperCase()}
                 </div>
                 <div className="comment-thread__panel">
                     <div className="comment-thread__panel__header">
                         <div className="comment-thread__panel__header__button resolve-button">
-                            <FaRegCheckCircle onClick={resolve}/>
+                            <FaRegCheckCircle data-testid="resolve-button" onClick={resolve}/>
                         </div>
                         <div className="comment-thread__panel__header__button close-button">
-                            <FaTimes onClick={close}/>
+                            <FaTimes data-testid="close-button" onClick={close}/>
                         </div>
                     </div>
                     {thread.map((message) =>
@@ -116,10 +116,8 @@ const CommentThread = ({commentId, starter, currentUser, thread, setCommentStage
                             content={message.content}
                         />
                     )}
-                    {/*<div>*/}
-                        <NewMessage commentId={commentId} currentUser={currentUser}
-                                    updateCommentThread={updateCommentThread}/>
-                    {/*</div>*/}
+                    <NewMessage commentId={commentId} currentUser={currentUser}
+                                updateCommentThread={updateCommentThread}/>
                 </div>
             </div>
         </Html>
@@ -166,7 +164,7 @@ const NewMessage = ({commentId, currentUser, updateCommentThread}) => {
             <div className="new-message__input">
                 <input ref={inputRef} type="text" onKeyDown={pressEnterHandler} maxLength={MAX_LENGTH_MESSAGE}
                        placeholder={'Reply'}/>
-                <FaArrowCircleUp onClick={submit}/>
+                <FaArrowCircleUp data-testid="new-message-submit" onClick={submit}/>
             </div>
         </div>
     );
@@ -202,7 +200,7 @@ const CommentStarter = ({commentId, starter, setCommentStage}) => {
                 <div className="comment-starter__input">
                     <input ref={inputRef} type="text" onKeyDown={pressEnterHandler} maxLength={MAX_LENGTH_MESSAGE}
                            placeholder={'Add a comment'}/>
-                    <FaArrowCircleUp onClick={submit}/>
+                    <FaArrowCircleUp data-testid="submit-the-first-comment" onClick={submit}/>
                 </div>
             </div>
         </Html>

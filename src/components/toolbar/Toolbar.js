@@ -51,6 +51,7 @@ const ModeButton = ({title, switchMode, isSelected}) => {
                     {'toolbar__btn--selected': isSelected}
                 )
             }
+            data-testid={title}
             onClick={switchMode}>
             {modeIcons[title]}
         </div>
@@ -64,7 +65,7 @@ const UserButton = ({user, switchUser}) => {
 
     return (
         <div className="toolbar__user">
-            <div className="toolbar__user__avatar">
+            <div data-testid='user-avatar' className="toolbar__user__avatar">
                 {user.charAt(0).toUpperCase()}
             </div>
             <select className="toolbar__user__select" onChange={onChangeHandler}>
