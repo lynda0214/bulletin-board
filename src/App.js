@@ -9,7 +9,7 @@ import Canvas from './components/canvas/Canvas';
 import {MODE, ID_PREFIX} from './constants';
 import './App.css';
 
-const CURSOR_FOLDER = `${process.env.PUBLIC_URL}/cursor`;
+const CURSOR_FOLDER = `cursor`;
 
 const GET_CURSOR_PATH = {
     [MODE.PICTURE]: () => `url('${CURSOR_FOLDER}/picture.png'),auto`,
@@ -28,21 +28,6 @@ const App = () => {
     const [selectID, setSelectID] = useState(ID_PREFIX.CANVAS);
     const [newComment, setNewComment] = useState(null);
     const [newPicture, setNewPicture] = useState(null);
-
-    useEffect(() => {
-        // preload cursor images
-        Object.keys(MODE).map((m) => {
-            if (m !== MODE.HAND) {
-                const image = new Image();
-                image.src = `${CURSOR_FOLDER}/${m.toLowerCase()}.png`;
-            } else {
-                const image = new Image();
-                image.src = `${CURSOR_FOLDER}/hand-rock.png`;
-                const image2 = new Image();
-                image2.src = `${CURSOR_FOLDER}/hand-paper.png`;
-            }
-        });
-    }, []);
 
     const handleClick = (event) => {
         setIsClicking(true);
