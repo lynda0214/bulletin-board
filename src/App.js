@@ -1,4 +1,4 @@
-import {useContext, useState, useRef} from 'react';
+import {useContext, useState, useRef, useEffect} from 'react';
 import Konva from 'konva';
 import {Stage} from 'react-konva';
 import moment from 'moment';
@@ -29,9 +29,24 @@ const App = () => {
     const [newComment, setNewComment] = useState(null);
     const [newPicture, setNewPicture] = useState(null);
 
+    useEffect(() => {
+        // preload cursor images
+        Object.keys(MODE).map((m) => {
+            if (m !== MODE.HAND) {
+                const image = new Image();
+                image.src = `${CURSOR_FOLDER}/${m.toLowerCase()}.png`;
+            } else {
+                const image = new Image();
+                image.src = `${CURSOR_FOLDER}/hand-rock.png`;
+                const image2 = new Image();
+                image2.src = `${CURSOR_FOLDER}/hand-paper.png`;
+            }
+        });
+    }, []);
+
     const handleClick = (event) => {
         setIsClicking(true);
-        switch(mode) {
+        switch (mode) {
             case MODE.POINTER:
                 setSelectID(event.target.id());
                 return;
@@ -86,7 +101,7 @@ const App = () => {
             y: (pointerY - stage.y()) / oldScale,
         };
         const newScale = event.evt.deltaY > 0 ? oldScale * SCALE_BY : oldScale / SCALE_BY;
-        stage.scale({ x: newScale, y: newScale });
+        stage.scale({x: newScale, y: newScale});
         const newPos = {
             x: pointerX - mousePointTo.x * newScale,
             y: pointerY - mousePointTo.y * newScale,
@@ -108,7 +123,8 @@ const App = () => {
                 onMouseUp={handleUnclick}
             >
                 <CanvasStatusProvider>
-                    <Canvas selectID={selectID} mode={mode} currentUser={user} newComment={newComment} newPicture={newPicture}/>
+                    <Canvas selectID={selectID} mode={mode} currentUser={user} newComment={newComment}
+                            newPicture={newPicture}/>
                 </CanvasStatusProvider>
             </Stage>
         </div>
