@@ -18,9 +18,12 @@ const Picture = ({
                      isSelecting,
                      comments,
                  }) => {
-    const {updatePicturePosition, removePicture} = useContext(CanvasStatusContext);
+    const {updatePicturePosition, removePicture, selectPictureReorder} = useContext(CanvasStatusContext);
     const [isDragging, setIsDragging] = useState(false);
     const [image] = useImage(`https://placekitten.com/${PICTURE_WIDTH}/${PICTURE_HEIGHT}`);
+    const onMouseDownHandler = () => {
+        selectPictureReorder(id);
+    }
     const onDragStartHandler = () => {
         setIsDragging(true);
     };
@@ -31,6 +34,7 @@ const Picture = ({
         setIsDragging(false);
     };
     const onClickRemove = (id) => {
+        if (mode !== MODE.POINTER) return;
         if (isDragging) return;
         removePicture(id);
     };
@@ -39,6 +43,7 @@ const Picture = ({
             x={x}
             y={y}
             draggable={mode === MODE.POINTER}
+            onMouseDown={onMouseDownHandler}
             onDragStart={onDragStartHandler}
             onDragEnd={onDragEndHandler}
         >

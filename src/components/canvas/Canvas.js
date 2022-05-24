@@ -4,7 +4,7 @@ import {Layer} from 'react-konva';
 import {CanvasStatusContext} from '../../contexts/CanvasStatusProvider';
 import Picture from '../picture/Picture';
 import Comment from '../comment/Comment';
-import {ID_PREFIX} from '../../constants';
+import {ID_PREFIX, MODE} from '../../constants';
 
 const Canvas = ({mode, currentUser, selectID, newComment, newPicture}) => {
     const {

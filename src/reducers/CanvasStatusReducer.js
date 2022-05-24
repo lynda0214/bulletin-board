@@ -29,6 +29,7 @@ export const ACTIONS = {
     ADD_PICTURE: 'ADD_PICTURE',
     REMOVE_PICTURE: 'REMOVE_PICTURE',
     UPDATE_PICTURE_POSITION: 'UPDATE_PICTURE_POSITION',
+    SELECT_PICTURE_REORDER: 'SELECT_PICTURE_REORDER',
     ADD_COMMENT: 'ADD_COMMENT',
     REMOVE_COMMENT: 'REMOVE_COMMENT',
     UPDATE_COMMENT_THREAD: 'UPDATE_COMMENT_THREAD'
@@ -58,6 +59,17 @@ const CanvasStatusReducer = (state, action) => {
                 pictures: [
                     ...restPictures,
                     {...targetPicture, x, y}
+                ]
+            };
+        }
+        case ACTIONS.SELECT_PICTURE_REORDER: {
+            const targetPicture = state.pictures.find((picture) => (picture.id === payload));
+            const restPictures = state.pictures.filter((picture) => (picture.id !== payload));
+            return {
+                ...state,
+                pictures: [
+                    ...restPictures,
+                    targetPicture
                 ]
             };
         }

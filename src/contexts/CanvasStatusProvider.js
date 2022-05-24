@@ -27,6 +27,12 @@ const CanvasStatusProvider = ({children}) => {
                 payload: {id, x, y}
             });
         },
+        selectPictureReorder: (id) => {
+            dispatch({
+                type: ACTIONS.SELECT_PICTURE_REORDER,
+                payload: id
+            });
+        },
         addComment: (newComment) => {
             dispatch({
                 type: ACTIONS.ADD_COMMENT,
