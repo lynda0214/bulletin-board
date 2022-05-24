@@ -1,4 +1,4 @@
-import {useContext, useState, useRef, useEffect} from 'react';
+import {useContext, useState, useRef} from 'react';
 import Konva from 'konva';
 import {Stage} from 'react-konva';
 import moment from 'moment';
@@ -9,7 +9,7 @@ import Canvas from './components/canvas/Canvas';
 import {MODE, ID_PREFIX} from './constants';
 import './App.css';
 
-const CURSOR_FOLDER = `cursor`;
+const CURSOR_FOLDER = `${process.env.PUBLIC_URL}/cursor`;
 
 const GET_CURSOR_PATH = {
     [MODE.PICTURE]: () => `url('${CURSOR_FOLDER}/picture.png'),auto`,

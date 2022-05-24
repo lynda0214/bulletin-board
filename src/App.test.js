@@ -3,7 +3,7 @@ import ModeProvider from './contexts/ModeProvider';
 import App from './App.js';
 import {MODE} from "./constants";
 
-const CURSOR_FOLDER = `cursor`;
+const CURSOR_FOLDER = `${process.env.PUBLIC_URL}/cursor`;
 
 test('initial cursor image is pointer', () => {
     render(<App/>, {wrapper: ModeProvider});
