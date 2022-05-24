@@ -64,7 +64,7 @@ test('remove comment after submitting nothing', () => {
     expect(removeComment).toBeCalled();
 })
 
-test('remove comment after blur', () => {
+test('remove empty comment after blur', () => {
     const removeComment = jest.fn();
     render(
         <Stage>
@@ -75,8 +75,8 @@ test('remove comment after blur', () => {
             </CanvasStatusContext.Provider>
         </Stage>
     );
-    const submit = screen.getByRole('textbox');
-    fireEvent.blur(submit);
+    const textinput = screen.getByRole('textbox');
+    fireEvent.blur(textinput);
     expect(removeComment).toBeCalled();
 })
 

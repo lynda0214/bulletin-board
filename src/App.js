@@ -58,12 +58,9 @@ const App = () => {
             }
             case MODE.PICTURE: {
                 let {x, y} = event.target.getStage().getRelativePointerPosition();
-                const newAnchor = {
-                    id: `${ID_PREFIX.PICTURE}_${x}_${y}_${moment().format('X')}`,
-                    x: x,
-                    y: y
-                }
-                setNewPicture(newAnchor);
+                const id = `${ID_PREFIX.PICTURE}_${x}_${y}_${moment().format('x')}`;
+                if (event.target.id().includes(id)) return;
+                setNewPicture({id, x, y});
                 return;
             }
             default:

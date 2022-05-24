@@ -220,8 +220,7 @@ const CommentStarter = ({commentId, starter, setCommentStage}) => {
         setCommentStage(COMMEMT_STAGE.COLLAPSED);
     };
     const onBlurHandler = async () => {
-        await removeComment(commentId);
-        return;
+        submit();
     }
     return (
         <Html divProps={{
