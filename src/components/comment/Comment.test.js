@@ -64,6 +64,22 @@ test('remove comment after submitting nothing', () => {
     expect(removeComment).toBeCalled();
 })
 
+test('remove comment after blur', () => {
+    const removeComment = jest.fn();
+    render(
+        <Stage>
+            <CanvasStatusContext.Provider value={{removeComment}}>
+                <Layer>
+                    <Comment {...testProps}/>
+                </Layer>
+            </CanvasStatusContext.Provider>
+        </Stage>
+    );
+    const submit = screen.getByRole('textbox');
+    fireEvent.blur(submit);
+    expect(removeComment).toBeCalled();
+})
+
 test('display comment thread after reopen it', async () => {
     const updateCommentThread = jest.fn();
     render(

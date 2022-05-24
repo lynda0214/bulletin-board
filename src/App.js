@@ -9,12 +9,14 @@ import Canvas from './components/canvas/Canvas';
 import {MODE, ID_PREFIX} from './constants';
 import './App.css';
 
+const CURSOR_FOLDER = `${process.env.PUBLIC_URL}/cursor`;
+
 const GET_CURSOR_PATH = {
-    [MODE.PICTURE]: () => `url('./cursor/picture.png'),auto`,
-    [MODE.COMMENT]: () => `url('./cursor/comment.png') 0 14,auto`,
-    [MODE.POINTER]: () => `url('./cursor/pointer.png'),auto`,
-    [MODE.HAND]: (isClicking) => isClicking ? `url('./cursor/hand-rock.png'),auto` : `url('./cursor/hand-paper.png'),auto`,
-    [MODE.MAGNIFIER]: () => `url('./cursor/magnifier.png'),auto`,
+    [MODE.PICTURE]: () => `url('${CURSOR_FOLDER}/picture.png'),auto`,
+    [MODE.COMMENT]: () => `url('${CURSOR_FOLDER}/comment.png') 0 14,auto`,
+    [MODE.POINTER]: () => `url('${CURSOR_FOLDER}/pointer.png'),auto`,
+    [MODE.HAND]: (isClicking) => isClicking ? `url('${CURSOR_FOLDER}/hand-rock.png'),auto` : `url('${CURSOR_FOLDER}/hand-paper.png'),auto`,
+    [MODE.MAGNIFIER]: () => `url('${CURSOR_FOLDER}/magnifier.png'),auto`,
 };
 
 const SCALE_BY = 1.01;

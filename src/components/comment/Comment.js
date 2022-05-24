@@ -219,6 +219,10 @@ const CommentStarter = ({commentId, starter, setCommentStage}) => {
         await updateCommentThread(commentId, starter, timestamp, content);
         setCommentStage(COMMEMT_STAGE.COLLAPSED);
     };
+    const onBlurHandler = async () => {
+        await removeComment(commentId);
+        return;
+    }
     return (
         <Html divProps={{
             style: {
@@ -231,7 +235,7 @@ const CommentStarter = ({commentId, starter, setCommentStage}) => {
                 </div>
                 <div className="comment-starter__input">
                     <input ref={inputRef} type="text" onKeyDown={pressEnterHandler} maxLength={MAX_LENGTH_MESSAGE}
-                           placeholder={'Add a comment'}/>
+                           placeholder={'Add a comment'} autoFocus onBlur={onBlurHandler}/>
                     <FaArrowCircleUp data-testid="submit-the-first-comment" onClick={submit}/>
                 </div>
             </div>
