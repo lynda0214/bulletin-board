@@ -163,7 +163,7 @@ const Message = ({user, timestamp, content}) => {
 
 Message.propTypes = {
     user: PropTypes.string.isRequired,
-    timestamp: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
     content: PropTypes.string.isRequired
 }
 
@@ -220,7 +220,11 @@ const CommentStarter = ({commentId, starter, setCommentStage}) => {
         setCommentStage(COMMEMT_STAGE.COLLAPSED);
     };
     const onBlurHandler = async () => {
-        submit();
+        const content = inputRef.current.value.trim();
+        if (content === '') {
+            await removeComment(commentId);
+            return;
+        }
     }
     return (
         <Html divProps={{
