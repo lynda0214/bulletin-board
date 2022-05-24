@@ -13,7 +13,7 @@ const GET_CURSOR_PATH = {
     [MODE.PICTURE]: () => `url('./cursor/picture.png'),auto`,
     [MODE.COMMENT]: () => `url('./cursor/comment.png') 0 14,auto`,
     [MODE.POINTER]: () => `url('./cursor/pointer.png'),auto`,
-    [MODE.HAND]: (isClicking) => isClicking ? `url('./cursor/hand-rock.png'),auto` : `url('cursor/hand-paper.png'),auto`,
+    [MODE.HAND]: (isClicking) => isClicking ? `url('./cursor/hand-rock.png'),auto` : `url('./cursor/hand-paper.png'),auto`,
     [MODE.MAGNIFIER]: () => `url('./cursor/magnifier.png'),auto`,
 };
 
