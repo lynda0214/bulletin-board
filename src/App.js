@@ -29,6 +29,12 @@ const App = () => {
     const [newComment, setNewComment] = useState(null);
     const [newPicture, setNewPicture] = useState(null);
 
+    useEffect(() => {
+        // preload hand-rock
+        const image = new Image();
+        image.src = `${CURSOR_FOLDER}/hand-rock.png`;
+    }, []);
+
     const handleClick = (event) => {
         setIsClicking(true);
         switch (mode) {
