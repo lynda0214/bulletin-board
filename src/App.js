@@ -1,4 +1,4 @@
-import {useContext, useState, useRef} from 'react';
+import {useContext, useState, useRef, useEffect} from 'react';
 import Konva from 'konva';
 import {Stage} from 'react-konva';
 import moment from 'moment';
@@ -28,6 +28,10 @@ const App = () => {
     const [selectID, setSelectID] = useState(ID_PREFIX.CANVAS);
     const [newComment, setNewComment] = useState(null);
     const [newPicture, setNewPicture] = useState(null);
+
+    useEffect(() => {
+        setSelectID(ID_PREFIX.CANVAS);
+    }, [mode]);
 
     const handleClick = (event) => {
         setIsClicking(true);
