@@ -52,3 +52,6 @@ In the project directory, you can run:
 1) Run `npm install` to installed necessary dependencies
 2) Run `npm run start` to see this app running on `localhost:3000`
 3) Run `npm run test` to see the test results 
+
+## Acknowledgements
+Special thanks to [@movehand](https://github.com/movehand) and [@sposusu](https://github.com/sposusu) for spotting out the errors!
