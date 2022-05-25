@@ -2,10 +2,18 @@
 
 [![youtube demo](https://i.imgur.com/SW0tGQ3.png)](https://www.youtube.com/watch?v=McfmRUB6fMM)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br/>
-Mainly powered by [react-konva](https://github.com/konvajs/react-konva)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app),<br/>
+and mainly powered by [react-konva](https://github.com/konvajs/react-konva)
 
 The demo page is [here](https://lynda0214.github.io/phase-comments/)
+
+# Updates & Hotfixes :fire:
+1) 220524 fix message invalid date
+2) 220524 fix: prevent picture keeps adding at the same spot
+3) 220524 feature: focus automatically when starting a comment
+5) 220524 feature: remove automatically when blurring with empty comment
+6) 220525 feature: select picture will move to top 
+7) 220525 feature: unselect picture when switching modes
 
 # Features
 ## Generics
