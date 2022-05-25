@@ -6,6 +6,7 @@ import {ModeContext} from './contexts/ModeProvider';
 import CanvasStatusProvider from './contexts/CanvasStatusProvider';
 import Toolbar from './components/toolbar/Toolbar';
 import Canvas from './components/canvas/Canvas';
+import {FaQuestion} from 'react-icons/fa';
 import {MODE, ID_PREFIX} from './constants';
 import './App.css';
 
@@ -97,6 +98,7 @@ const App = () => {
 
     return (
         <div data-testid="app" style={{cursor: `${GET_CURSOR_PATH[mode](isClicking)}`}}>
+            <GitHubButton/>
             <Toolbar/>
             <Stage
                 ref={stageRef}
@@ -118,3 +120,11 @@ const App = () => {
 };
 
 export default App;
+
+const GitHubButton = () => (
+  <a href="https://github.com/lynda0214/phase-comments#readme" target="_blank">
+      <div className="github-button">
+            <FaQuestion/>
+      </div>
+  </a>
+);

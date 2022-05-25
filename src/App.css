@@ -6,3 +6,23 @@ body {
 .konvajs-content {
   background-color: #efefef;
 }
+
+.github-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 999;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: #cccccc;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.10);
+}
+
+.github-button:hover {
+  color: #626262;
+}
