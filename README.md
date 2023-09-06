@@ -1,11 +1,11 @@
-# Welcome to Phase-Comments
+# Welcome to Bulletin Board
 
 [![youtube demo](https://i.imgur.com/SW0tGQ3.png)](https://www.youtube.com/watch?v=McfmRUB6fMM)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app),<br/>
 and mainly powered by [react-konva](https://github.com/konvajs/react-konva)
 
-The demo page is [here](https://lynda0214.github.io/phase-comments/)
+The demo page is [here](https://lynda0214.github.io/bulletin-board/)
 
 # Updates & Hotfixes :fire:
 1) 220524 fix message invalid date
