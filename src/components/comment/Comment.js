@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Circle, Group, Line} from 'react-konva';
 import {Html} from 'react-konva-utils/es';
 import moment from 'moment';
-import {FaArrowCircleUp, FaRegCheckCircle, FaTimes} from 'react-icons/fa';
+import {FaArrowCircleUp, FaTimes} from 'react-icons/fa';
 import {CanvasStatusContext} from '../../contexts/CanvasStatusProvider';
 import './Comment.css';
 
@@ -108,16 +108,13 @@ const CommentThread = ({commentId, starter, currentUser, thread, setCommentStage
             }
         }}>
             <div data-testid="comment-thread" className="comment-thread">
-                <div className="comment__avatar">
+                <div className="comment__avatar" data-testid="close-button" onClick={close}>
                     {starter.charAt(0).toUpperCase()}
                 </div>
                 <div className="comment-thread__panel">
                     <div className="comment-thread__panel__header">
                         <div className="comment-thread__panel__header__button resolve-button">
-                            <FaRegCheckCircle data-testid="resolve-button" onClick={resolve}/>
-                        </div>
-                        <div className="comment-thread__panel__header__button close-button">
-                            <FaTimes data-testid="close-button" onClick={close}/>
+                            <FaTimes data-testid="resolve-button" onClick={resolve}/>
                         </div>
                     </div>
                     {thread.map((message) =>
