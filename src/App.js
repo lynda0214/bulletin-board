@@ -122,7 +122,7 @@ const App = () => {
 export default App;
 
 const GitHubButton = () => (
-  <a href="https://github.com/lynda0214/phase-comments#readme" target="_blank">
+  <a href="https://github.com/lynda0214/bulletin-board#readme" target="_blank">
       <div className="github-button">
             <FaQuestion/>
       </div>

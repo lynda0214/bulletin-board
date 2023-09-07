@@ -6,9 +6,9 @@ export const MODE = {
     MAGNIFIER: 'magnifier',
 };
 export const USER = {
-  LYNDA: 'Lynda Lin',
-  NICK: 'Nick Tsygankov',
-  DAVID: 'David Canning'
+  LYNDA: 'Lynda',
+  BOB: 'Bob',
+  ALICE: 'Alice'
 };
 export const ID_PREFIX = {
     CANVAS: 'canvas',
