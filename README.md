@@ -7,6 +7,8 @@ and mainly powered by [react-konva](https://github.com/konvajs/react-konva)
 
 The demo page is [here](https://lynda0214.github.io/bulletin-board/)
 
+The demo video is [here](https://youtu.be/5hVZ9sILnTk)
+
 # Updates & Hotfixes :fire:
 1) 220524 fix message invalid date
 2) 220524 fix: prevent picture keeps adding at the same spot
