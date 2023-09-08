@@ -1,6 +1,6 @@
 # Welcome to Bulletin Board
 
-[![youtube demo](https://i.imgur.com/SW0tGQ3.png)](https://youtu.be/5hVZ9sILnTk)
+[![youtube demo](https://i.imgur.com/tIFMX33.png)](https://youtu.be/5hVZ9sILnTk)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app),<br/>
 and mainly powered by [react-konva](https://github.com/konvajs/react-konva)
